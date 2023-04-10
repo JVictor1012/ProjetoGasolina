@@ -1,20 +1,43 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header collapse="fade">
+  <ion-toolbar color="dark">
+    <ion-title>BestFuel</ion-title> 
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-card [color]="color" id="card-inicial">
+  <ion-card-header>
+    <ion-card-title>Álcool ou Gasolina?</ion-card-title>
+    <ion-card-subtitle>{{ opcao }}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <img alt="Carrinho" src="https://i.pinimg.com/originals/5b/ac/0a/5bac0a81ff4f4e5fc957c3c468b72a6f.png" />
+  </ion-card-content>
+</ion-card>
+
+
+<ion-content [fullscreen]="false">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large"></ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="">
+    <ion-list>
+      <ion-item>
+        <ion-input label="Álcool" labelPlacement="floating" placeholder="" #valorAlcool></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Gasolina" labelPlacement="floating" placeholder="" #valorGasolina></ion-input>
+      </ion-item>
+    </ion-list>
+    <br>
+
+    <ion-button shape="round" (click)="calcular(valorAlcool, valorGasolina)">Calcular</ion-button>
+
+    <br>
+
+
   </div>
 </ion-content>

@@ -2,4 +2,8 @@ node_modules
 
 src
 
+/src 
+
+/src/
+
 README

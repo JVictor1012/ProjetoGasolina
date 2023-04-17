@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule, IonInput } from '@ionic/angular';
 
 @Component({
@@ -6,7 +7,7 @@ import { IonicModule, IonInput } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, ReactiveFormsModule ],
 })
 export class HomePage {
 
@@ -14,22 +15,26 @@ export class HomePage {
   resultado : number;
   color: String;
   opcao: String
+  formulario : FormGroup;
+  titulo : string;
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
 
     this.resultado = 0;
     this.color = "light"
     this.opcao = "Descubra o melhor preço para você!"
+    this.titulo = "Álcool ou Gasolina?"
+
+    this.formulario = fb.group({
+      alcool: ['', [Validators.required, Validators.min(1)]], //[valor inicial, [validações]]
+      gasolina: ['',[Validators.required, Validators.min(1)]]
+    })
   }
 
-  calcular(alcool: IonInput, gasolina: IonInput) {
-    let calculo: any;
-    if(alcool.value != null && gasolina.value != null){
-      calculo = +alcool.value / +gasolina.value;
-    }
+  calcular() {
+    let valores = this.formulario.value
 
-
-
+    let calculo = +valores.alcool / +valores.gasolina;
 
     this.resultado = calculo
 
@@ -38,11 +43,13 @@ export class HomePage {
     if(this.resultado <= 0.7){
       this.color = "tertiary"
       this.opcao = "Você deveria usar Álcool!"
+      this.titulo = "Álcool!"
     }
 
     if(this.resultado > 0.7){
       this.color = "warning"
       this.opcao = "Você deveria usar Gasolina!"
+      this.titulo = "Gasolina!"
 
     }
 
